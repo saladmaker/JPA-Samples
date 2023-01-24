@@ -1,0 +1,15 @@
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
+             version="3.1">
+    <persistence-unit name="BasicMapping" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <!--it better to list your entities than to use this element!-->
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <class>com.khaled.jpa.basic.mapping.Customer</class>
+        <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+        <property name="eclipselink.logging.level.sql" value="FINE"/>
+        <property name="eclipselink.logging.parameters" value="true"/>
+        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
+    </persistence-unit>
+</persistence>
