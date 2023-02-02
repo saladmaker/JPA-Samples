@@ -27,8 +27,8 @@ public class Employee {
     @Column(name = "last_name")
     private String lastName;
 
-    @JoinColumn(name = "DEP_id")
     @ManyToOne()
+    @JoinColumn(name = "DEP_id")
     Department department;
 
     public Employee() {
@@ -82,7 +82,7 @@ public class Employee {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id);
+        return Employee.class.hashCode();
     }
 
     @Override

@@ -15,6 +15,7 @@
         <module>simple-type-emebbedable-map</module>
         <module>many-to-many-unidirectional</module>
         <module>many-to-many-bidirectional</module>
+        <module>embeddable-type-colleciton</module>
     </modules>
     <build>
         <plugins>

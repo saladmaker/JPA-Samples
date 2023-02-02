@@ -18,6 +18,7 @@
         <h2.version>2.1.214</h2.version>
         <hibernate.version>6.1.6.Final</hibernate.version>
         <mysql.version>8.0.31</mysql.version>
+        <hamcrest.version>2.2</hamcrest.version>
     </properties>
     <dependencies>        
         <dependency>
@@ -41,7 +42,12 @@
             <artifactId>mysql-connector-j</artifactId>
             <version>${mysql.version}</version>
         </dependency>
-        
+        <dependency>
+            <artifactId>hamcrest</artifactId>
+            <groupId>org.hamcrest</groupId>
+            <scope>test</scope>
+            <version>${hamcrest.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->

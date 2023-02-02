@@ -1,4 +1,4 @@
-package com.khaled.jpa.learning.simple.type.collection;
+package com.khaled.jpa.learning.simple.type.collection.set;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author khaled
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class ElementTypeCollectionsTest {
+public class SetTest {
 
     private final String JAVA = "Java";
     private final String JAKARTAEE = "Jakarta EE";
@@ -30,13 +30,13 @@ public class ElementTypeCollectionsTest {
 
     @BeforeAll
     static void generateDatabase() {
-        emf = Persistence.createEntityManagerFactory("setupUCollectionElement");
+        emf = Persistence.createEntityManagerFactory("setupUCollectionElementSet");
         em = emf.createEntityManager();
     }
 
     @BeforeEach
     void createPersistenceContext() {
-        emf = Persistence.createEntityManagerFactory("readyUCollectionElement");
+        emf = Persistence.createEntityManagerFactory("readyUCollectionElementSet");
         em = emf.createEntityManager();
     }
 
@@ -49,7 +49,7 @@ public class ElementTypeCollectionsTest {
     @Test
     @Order(1)
     void createUser() {
-        var user = new User("khaled@ap.com", "adfs");
+        var user = new Users("khaled@ap.com", "adfs");
         user.addIntrest(JAVA);
         em.getTransaction().begin();
         em.persist(user);
@@ -61,8 +61,8 @@ public class ElementTypeCollectionsTest {
     @Order(2)
     void createUserTest() {
         var actual = em.createQuery(
-                "SELECT u FROM User u",
-                User.class)
+                "SELECT u FROM Users u",
+                Users.class)
                 .getSingleResult();
         assertNotNull(actual.getId());
         System.out.println("*****lazy loading here******");
@@ -74,12 +74,12 @@ public class ElementTypeCollectionsTest {
     @Order(3)
     void removeIntrest() {
         var actual = em.createQuery(
-                "SELECT u FROM User u",
-                User.class)
+                "SELECT u FROM Users u",
+                Users.class)
                 .getSingleResult();
         var intrests = actual.getIntrests();
         em.getTransaction().begin();
-        intrests.removeIf(intrest -> intrest.equals(JAVA));
+        intrests.removeIf(JAVA::equals);
         em.getTransaction().commit();
     }
 
@@ -87,20 +87,20 @@ public class ElementTypeCollectionsTest {
     @Order(4)
     void removeIntrestTest() {
         var actual = em.createQuery(
-                "SELECT u FROM User u",
-                User.class)
+                "SELECT u FROM Users u",
+                Users.class)
                 .getSingleResult();
         var intrest = actual.getIntrests();
         assertEquals(intrest, Set.of(JAKARTAEE));
     }
-    
+
     @Test
     @Order(5)
     void addIntrests() {
-        var insterst = Set.of("MicroProfile", "Helidon");
+        var insterst = Set.of(MICROPROFILE, HELIDON);
         var user = em.createQuery(
-                "SELECT u FROM User u",
-                User.class)
+                "SELECT u FROM Users u",
+                Users.class)
                 .getSingleResult();
         em.getTransaction().begin();
         user.getIntrests().addAll(insterst);
@@ -110,15 +110,28 @@ public class ElementTypeCollectionsTest {
     @Test
     @Order(6)
     void addIntrestsTest() {
-        var insterst = Set.of(MICROPROFILE, HELIDON);
         var user = em.createQuery(
-                "SELECT u FROM User u",
-                User.class)
+                "SELECT u FROM Users u",
+                Users.class)
                 .getSingleResult();
         var actualIntrest = user.getIntrests();
         assertEquals(
                 actualIntrest,
-                Set.of(JAKARTAEE, MICROPROFILE, HELIDON)
+                Set.of(JAKARTAEE, HELIDON, MICROPROFILE)
         );
+    }
+
+    @Test
+    @Order(7)
+    void addDuplicateIntrestTest() {
+        var user = em.createQuery(
+                "SELECT u FROM Users u",
+                Users.class
+        ).getSingleResult();
+        
+        em.getTransaction().begin();
+        boolean added = user.addIntrest(HELIDON);
+        em.getTransaction().commit();
+        assertFalse(added);
     }
 }

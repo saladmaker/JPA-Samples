@@ -1,41 +1,50 @@
-package com.khaled.jpa.learning.simple.type.collection;
+package com.khaled.jpa.learning.simple.type.collection.orderby;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
-import java.util.HashSet;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OrderBy;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  *
  * @author khaled
  */
 @Entity
-@Table(name = "usr_t")
-public class User {
+public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id private Long id;
+    @Column(nullable = true, unique = true)
     private String email;
     private String password;
     //lazy by defaults
     @ElementCollection
-     Set<String> intrests= new HashSet<>();
+    @CollectionTable(
+            name = "INTREST",
+            joinColumns = @JoinColumn(name = "USERS_ID")
+            )
+    @OrderBy
+    @Column(name = "INTREST_NAME", nullable = false)
+    private List<String> intrests= new ArrayList<>();
 
-    public User(String email, String password) {
+    public Users(String email, String password) {
         this.email = email;
         this.password = password;
     }
 
-    public User() {
+    public Users() {
     }
     @Override
     public boolean equals(Object obj) {
-        return (obj instanceof User u)&&
-                Objects.equals(this.id, u.id);
+        return (obj instanceof Users u)&&
+                Objects.equals(this.email, u.email);
     }
 
     public Long getId() {
@@ -62,11 +71,11 @@ public class User {
         this.password = password;
     }
 
-    public Set<String> getIntrests() {
+    public List<String> getIntrests() {
         return intrests;
     }
 
-    public void setIntrests(Set<String> intrests) {
+    public void setIntrests(List<String> intrests) {
         this.intrests = intrests;
     }
     public boolean addIntrest(String intrest){
@@ -78,7 +87,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(email);
     }
 
     @Override

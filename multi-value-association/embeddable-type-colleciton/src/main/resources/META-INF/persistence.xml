@@ -3,10 +3,11 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
              version="3.1">
-    <persistence-unit name="setupUCollectionElementSet" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="setupEmbeddableCollectionList" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        <class>com.khaled.jpa.learning.simple.type.collection.set.Users</class>
+        <class>com.khaled.jpa.learning.embeddable.type.collection.list.Customer</class>
+        <class>com.khaled.jpa.learning.embeddable.type.collection.list.Adress</class>
         <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
         <property name="eclipselink.logging.level.sql" value="FINEST"/>
         <property name="eclipselink.logging.parameters" value="true"/>
@@ -14,10 +15,11 @@
         <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
         <property name="eclipselink.target-database" value="DB2"/>
     </persistence-unit>
-    <persistence-unit name="readyUCollectionElementSet" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="readyEmbeddableCollectionList" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        <class>com.khaled.jpa.learning.simple.type.collection.set.Users</class>   
+        <class>com.khaled.jpa.learning.embeddable.type.collection.list.Customer</class>
+        <class>com.khaled.jpa.learning.embeddable.type.collection.list.Adress</class> 
         <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
         <property name="eclipselink.logging.level.sql" value="FINEST"/>
         <property name="eclipselink.logging.parameters" value="true"/>
@@ -26,14 +28,11 @@
         <property name="eclipselink.target-database" value="DB2"/>
     </persistence-unit>
     
-    
-    
-    <persistence-unit name="setupUCollectionElementList" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="setupEmbeddableCollectionSet" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <!--it better to list your entities than to use this element!-->
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        <class>com.khaled.jpa.learning.simple.type.collection.list.Users</class>
-            
+        <class>com.khaled.jpa.learning.embeddable.type.collection.set.Customer</class>
+        <class>com.khaled.jpa.learning.embeddable.type.collection.set.Adress</class>
         <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
         <property name="eclipselink.logging.level.sql" value="FINEST"/>
         <property name="eclipselink.logging.parameters" value="true"/>
@@ -41,10 +40,11 @@
         <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
         <property name="eclipselink.target-database" value="DB2"/>
     </persistence-unit>
-    <persistence-unit name="readyUCollectionElementList" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="readyEmbeddableCollectionSet" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        <class>com.khaled.jpa.learning.simple.type.collection.list.Users</class>    
+        <class>com.khaled.jpa.learning.embeddable.type.collection.set.Customer</class>
+        <class>com.khaled.jpa.learning.embeddable.type.collection.set.Adress</class> 
         <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
         <property name="eclipselink.logging.level.sql" value="FINEST"/>
         <property name="eclipselink.logging.parameters" value="true"/>
@@ -52,12 +52,11 @@
         <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
         <property name="eclipselink.target-database" value="DB2"/>
     </persistence-unit>
-    
-    <persistence-unit name="setupUCollectionElementOrder" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="setupEmbeddableCollectionOrderColumn" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <!--it better to list your entities than to use this element!-->
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        <class>com.khaled.jpa.learning.simple.type.collection.order.Users</class>        
+        <class>com.khaled.jpa.learning.embeddable.type.collection.ordercolumn.Customer</class>
+        <class>com.khaled.jpa.learning.embeddable.type.collection.ordercolumn.Adress</class>
         <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
         <property name="eclipselink.logging.level.sql" value="FINEST"/>
         <property name="eclipselink.logging.parameters" value="true"/>
@@ -65,10 +64,11 @@
         <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
         <property name="eclipselink.target-database" value="DB2"/>
     </persistence-unit>
-    <persistence-unit name="readyUCollectionElementOrder" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="readyEmbeddableCollectionOrderColumn" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        <class>com.khaled.jpa.learning.simple.type.collection.order.Users</class>    
+        <class>com.khaled.jpa.learning.embeddable.type.collection.ordercolumn.Customer</class>
+        <class>com.khaled.jpa.learning.embeddable.type.collection.ordercolumn.Adress</class> 
         <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
         <property name="eclipselink.logging.level.sql" value="FINEST"/>
         <property name="eclipselink.logging.parameters" value="true"/>
@@ -76,12 +76,23 @@
         <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
         <property name="eclipselink.target-database" value="DB2"/>
     </persistence-unit>
-    
-    <persistence-unit name="setupUCollectionElementOrderBy" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="readyEmbeddableCollectionSet" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <!--it better to list your entities than to use this element!-->
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        <class>com.khaled.jpa.learning.simple.type.collection.orderby.Users</class>        
+        <class>com.khaled.jpa.learning.embeddable.type.collection.set.Customer</class>
+        <class>com.khaled.jpa.learning.embeddable.type.collection.set.Adress</class> 
+        <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
+        <property name="eclipselink.logging.level.sql" value="FINEST"/>
+        <property name="eclipselink.logging.parameters" value="true"/>
+        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
+        <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+        <property name="eclipselink.target-database" value="DB2"/>
+    </persistence-unit>
+    <persistence-unit name="setupEmbeddableCollectionOrderBy" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <class>com.khaled.jpa.learning.embeddable.type.collection.orderby.Customer</class>
+        <class>com.khaled.jpa.learning.embeddable.type.collection.orderby.Adress</class>
         <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
         <property name="eclipselink.logging.level.sql" value="FINEST"/>
         <property name="eclipselink.logging.parameters" value="true"/>
@@ -89,10 +100,11 @@
         <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
         <property name="eclipselink.target-database" value="DB2"/>
     </persistence-unit>
-    <persistence-unit name="readyUCollectionElementOrderBy" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="readyEmbeddableCollectionOrderBy" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        <class>com.khaled.jpa.learning.simple.type.collection.orderby.Users</class>    
+        <class>com.khaled.jpa.learning.embeddable.type.collection.orderby.Customer</class>
+        <class>com.khaled.jpa.learning.embeddable.type.collection.orderby.Adress</class> 
         <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
         <property name="eclipselink.logging.level.sql" value="FINEST"/>
         <property name="eclipselink.logging.parameters" value="true"/>
@@ -100,5 +112,28 @@
         <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
         <property name="eclipselink.target-database" value="DB2"/>
     </persistence-unit>
-       
+    <persistence-unit name="setupEmbeddableCollectionMap" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <class>com.khaled.jpa.learning.embeddable.type.collection.map.Customer</class>
+        <class>com.khaled.jpa.learning.embeddable.type.collection.map.Adress</class>
+        <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+        <property name="eclipselink.logging.level.sql" value="FINEST"/>
+        <property name="eclipselink.logging.parameters" value="true"/>
+        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
+        <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+        <property name="eclipselink.target-database" value="DB2"/>
+    </persistence-unit>
+    <persistence-unit name="readyEmbeddableCollectionMap" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <class>com.khaled.jpa.learning.embeddable.type.collection.map.Customer</class>
+        <class>com.khaled.jpa.learning.embeddable.type.collection.map.Adress</class> 
+        <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
+        <property name="eclipselink.logging.level.sql" value="FINEST"/>
+        <property name="eclipselink.logging.parameters" value="true"/>
+        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
+        <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+        <property name="eclipselink.target-database" value="DB2"/>
+    </persistence-unit>
 </persistence>
