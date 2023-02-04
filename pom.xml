@@ -8,6 +8,7 @@
     <modules>
         <module>single-value-associations</module>
         <module>multi-value-association</module>
+        <module>inheritance</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
