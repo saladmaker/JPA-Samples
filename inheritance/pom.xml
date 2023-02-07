@@ -14,5 +14,6 @@
         <module>single-table</module>
         <module>joined</module>
         <module>with-relatonships</module>
+        <module>iheriting-non-entity-classes</module>
     </modules>
 </project>
