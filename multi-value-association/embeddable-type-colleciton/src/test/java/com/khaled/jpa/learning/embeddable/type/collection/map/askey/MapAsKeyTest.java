@@ -1,4 +1,4 @@
-package com.khaled.jpa.learning.embeddable.type.collection.map;
+package com.khaled.jpa.learning.embeddable.type.collection.map.askey;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.*;
  * @author khaled
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class MapTest {
+public class MapAsKeyTest {
 
     private final String HOME = "HOME";
     private final String WORK = "WORK";
@@ -45,13 +45,13 @@ public class MapTest {
 
     @BeforeAll
     static void generateDatabase() {
-        emf = Persistence.createEntityManagerFactory("setupEmbeddableCollectionMap");
+        emf = Persistence.createEntityManagerFactory("setupEmbeddableCollectionMapAsKey");
         em = emf.createEntityManager();
     }
 
     @BeforeEach
     void createPersistenceContext() {
-        emf = Persistence.createEntityManagerFactory("readyEmbeddableCollectionMap");
+        emf = Persistence.createEntityManagerFactory("readyEmbeddableCollectionMapAsKey");
         em = emf.createEntityManager();
     }
 
@@ -66,7 +66,7 @@ public class MapTest {
     void createCustomer() {
         em.getTransaction().begin();
         em.persist(PAUL);
-        PAUL.addAdress(HOME, HOME_PAUL);
+        PAUL.addAdress(HOME_PAUL, HOME);
         em.getTransaction().commit();
     }
 
@@ -79,7 +79,7 @@ public class MapTest {
         ).setParameter("email", PAUL.getEmail())
                 .getSingleResult();
         var paulAdresses = paul.getAdresses();
-        var expected = Map.of(HOME, HOME_PAUL);
+        var expected = Map.of(HOME_PAUL, HOME);
         assertThat(paulAdresses, is(expected));
     }
 
@@ -88,8 +88,8 @@ public class MapTest {
     void createBobbyAddAdresses() {
         em.getTransaction().begin();
         em.persist(BOBBY);
-        BOBBY.addAdress(HOME, HOME_BOBBY);
-        BOBBY.addAdress(WORK, WORK_BOBBY);
+        BOBBY.addAdress(HOME_BOBBY, HOME);
+        BOBBY.addAdress(WORK_BOBBY, WORK);
         em.getTransaction().commit();
     }
 
@@ -115,7 +115,7 @@ public class MapTest {
         ).setParameter("email", PAUL.getEmail())
                 .getSingleResult();
         em.getTransaction().begin();
-        paul.addAdress(WORK, WORK_PAUL);
+        paul.addAdress(WORK_PAUL, WORK);
         em.getTransaction().commit();
     }
 
@@ -128,7 +128,7 @@ public class MapTest {
         ).setParameter("email", PAUL.getEmail())
                 .getSingleResult();
         var paulAdresses = paul.getAdresses();
-        var expected = Map.of(WORK, WORK_PAUL, HOME, HOME_PAUL);
+        var expected = Map.of(WORK_PAUL, WORK, HOME_PAUL, HOME);
         assertThat(paulAdresses, is(expected));
     }
 
@@ -141,8 +141,8 @@ public class MapTest {
         ).setParameter("email", PAUL.getEmail())
                 .getSingleResult();
         em.getTransaction().begin();
-        paul.removeAdress(HOME);
-        paul.addAdress(ALTERNATIVE, ALTERNATIVE_PAUL);
+        paul.removeAdress(HOME_PAUL);
+        paul.addAdress(ALTERNATIVE_PAUL, ALTERNATIVE);
         em.getTransaction().commit();
     }
 
@@ -155,7 +155,7 @@ public class MapTest {
         ).setParameter("email", PAUL.getEmail())
                 .getSingleResult();
         var paulAdresses = paul.getAdresses();
-        Map<String,Adress> expected = Map.of(ALTERNATIVE, ALTERNATIVE_PAUL, WORK, WORK_PAUL);
+        Map<Adress, String> expected = Map.of(ALTERNATIVE_PAUL, ALTERNATIVE, WORK_PAUL, WORK);
         assertThat(paulAdresses, is(expected));
     }
 
@@ -168,7 +168,7 @@ public class MapTest {
         ).setParameter("email", PAUL.getEmail())
                 .getSingleResult();
         em.getTransaction().begin();
-        paul.addAdress(ALTERNATIVE,ALTERNATIVE_PAUL);
+        paul.addAdress(ALTERNATIVE_PAUL, ALTERNATIVE);
         em.getTransaction().commit();
         var paulAdresses = paul.getAdresses();
         assertThat(paulAdresses.size(), is(2));

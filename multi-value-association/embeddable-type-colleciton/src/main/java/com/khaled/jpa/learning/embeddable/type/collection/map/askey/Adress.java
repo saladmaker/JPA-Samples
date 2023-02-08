@@ -1,6 +1,5 @@
-package com.khaled.jpa.learning.embeddable.type.collection.map;
+package com.khaled.jpa.learning.embeddable.type.collection.map.askey;
 
-import com.khaled.jpa.learning.embeddable.type.collection.list.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import java.util.Objects;

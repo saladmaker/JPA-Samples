@@ -1,4 +1,4 @@
-package com.khaled.jpa.learning.embeddable.type.collection.map;
+package com.khaled.jpa.learning.embeddable.type.collection.map.askey;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -31,7 +31,7 @@ public class Customer {
             name = "ADRESS",
             joinColumns = @JoinColumn(name = "CUSTOMER_ID")
     )
-    private Map<String, Adress> adresses = new HashMap<>();
+    private Map<Adress, String> adresses = new HashMap<>();
 
     public Customer() {
     }
@@ -75,20 +75,20 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public Map<String, Adress> getAdresses() {
+    public Map<Adress, String> getAdresses() {
         return adresses;
     }
 
-    public void setAdresses(Map<String, Adress> adresses) {
+    public void setAdresses(Map<Adress, String> adresses) {
         this.adresses = adresses;
     }
 
-    public void addAdress(final String type, final Adress adress) {
+    public void addAdress(final Adress type, final String adress) {
         getAdresses().put(type, adress);
     }
 
-    public void removeAdress(final String type) {
-        getAdresses().remove(type);
+    public void removeAdress(final Adress adress) {
+        getAdresses().remove(adress);
     }
 
     @Override
@@ -106,5 +106,4 @@ public class Customer {
     public String toString() {
         return "Customer{" + "id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", adresses=" + adresses + '}';
     }
-
 }
