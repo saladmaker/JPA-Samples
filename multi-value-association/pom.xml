@@ -8,14 +8,7 @@
     </parent>
     <artifactId>multi-value-association</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>one-to-many-unidirectional</module>
-        <module>one-to-many-bidirectional</module>
-        <module>simple-type-collection</module>
-        <module>many-to-many-unidirectional</module>
-        <module>many-to-many-bidirectional</module>
-        <module>embeddable-type-colleciton</module>
-    </modules>
+    <modules></modules>
     <build>
         <plugins>
             <plugin>

@@ -39,7 +39,7 @@ public class SingleTableTest {
 
     @Test
     @Order(1)
-    void createCars() {
+    void createEmployees() {
         FullTimeEmployee fe = 
                 new FullTimeEmployee(BigDecimal.ZERO, "sfkhsk",
                         "sfkhsdf", "skdfhsdk");
@@ -55,24 +55,24 @@ public class SingleTableTest {
 
     @Test
     @Order(2)
-    void createCarsTest() {
-        var ec = em.createQuery(
+    void createEmployeesTest() {
+        var fe = em.createQuery(
                 "SELECT f FROM FullTimeEmployee f",
                 FullTimeEmployee.class
         ).getSingleResult();
-        assertThat(ec, notNullValue());
-        assertThat(ec.getId(), notNullValue());
-        var dc = em.createQuery(
+        assertThat(fe, notNullValue());
+        assertThat(fe.getId(), notNullValue());
+        var pe = em.createQuery(
                 "SELECT p FROM PartTimeEmployee p",
                 PartTimeEmployee.class
         ).getSingleResult();
-        assertThat(dc, notNullValue());
-        assertThat(dc.getId(), notNullValue());
-        var cs = em.createQuery(
+        assertThat(pe, notNullValue());
+        assertThat(pe.getId(), notNullValue());
+        var ae = em.createQuery(
                 "SELECT v FROM Employee v",
                 Employee.class
         ).getResultList();
-        assertThat(cs, hasSize(2));
+        assertThat(ae, hasSize(2));
         cs.forEach(System.out::println);
     }
 

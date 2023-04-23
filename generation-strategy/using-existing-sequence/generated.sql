@@ -1,16 +1,11 @@
 CREATE TABLE DEPARTMENT (ID BIGINT NOT NULL, NAME VARCHAR(255), PRIMARY KEY (ID))
+CREATE SEQUENCE DEP_SEQ INCREMENT BY 50 START WITH 50
 
-CREATE TABLE MY_GENERATOR (GEN_NAME VARCHAR(50) NOT NULL, GEN_COUNT DECIMAL(15), PRIMARY KEY (GEN_NAME))
-
-INSERT INTO MY_GENERATOR(GEN_NAME, GEN_COUNT) values ('dep_id', 5)
-
-
----------------------------------------------------------------------------
-UPDATE MY_GENERATOR SET GEN_COUNT = GEN_COUNT + ? WHERE GEN_NAME = ?
-	bind => [50, dep_id]
-SELECT GEN_COUNT FROM MY_GENERATOR WHERE GEN_NAME = ?
-	bind => [dep_id]
+--------test---------
+VALUES(NEXT VALUE FOR DEP_SEQ)
 INSERT INTO DEPARTMENT (ID, NAME) VALUES (?, ?)
-	bind => [6, management]
------------------------------------------------------------------------------
-SELECT ID, NAME FROM DEPARTMEN
+	bind => [1, management]
+--------test---------
+
+SELECT ID, NAME FROM DEPARTMENT
+

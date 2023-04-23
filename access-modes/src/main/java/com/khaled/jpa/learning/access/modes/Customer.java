@@ -24,7 +24,8 @@ public class Customer {
     private Long id;
     
    
-    @Column(name = "first_name",
+    @Column(
+            name = "first_name",
             nullable = false,
             updatable = false,
             length = 50

@@ -8,9 +8,5 @@
     </parent>
     <artifactId>single-value-associations</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>one-to-one-unidirectional</module>
-        <module>many-to-one-unidirectional</module>
-        <module>one-to-one-sharing-id</module>
-    </modules>
+    <modules></modules>
 </project>

@@ -20,10 +20,10 @@ public class Customer {
     private Long id;
     
     /*
-    name: specifies the corresponding column's name helpful when following SGBD naming conventions.
-    nullable: triggers SQL DLL NOT NULL!
-    updatable: include the the corresponding column into SQL update statement.
-    length :specifies the length of varchar(50)
+    name: specifies the corresponding column's name. `helpful when following SGBD naming conventions`.
+    nullable: triggers SQL DDL NOT NULL!
+    updatable: weahter to include the corresponding column into SQL update statements.
+    length :specifies the length of the column. in this case varchar(50)
     */
     @Column(name = "first_name",
             nullable = false,

@@ -5,11 +5,7 @@
     <artifactId>JPA-31-Exampels</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <modules>
-        <module>single-value-associations</module>
-        <module>multi-value-association</module>
-        <module>inheritance</module>
-    </modules>
+    <modules></modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>19</maven.compiler.release>
