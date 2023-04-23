@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
+             version="3.1">
+    <persistence-unit name="PU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <!--it better to list your entities than to use this element!-->
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
+        <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+        <property name="jakarta.persistence.schema-generation.scripts-action" value="create"/>
+        <property name="jakarta.persistence.schema-generation.create-source" value="script"/>
+        <property name="jakarta.persistence.schema-generation.create-script-source" 
+                  value="META-INF/sql/create.sql"/>
+
+        <property name="eclipselink.logging.level.sql" value="FINEST"/>
+        <property name="eclipselink.logging.parameters" value="true"/>
+        <property name="eclipselink.target-database" value="DB2"/>
+    </persistence-unit>
+</persistence>
