@@ -35,7 +35,6 @@ public class ExistingSequenceTest {
     @Test
     @Order(1)
     void persistDepartmentTest() {
-        System.out.println("--------test---------");
         Department department = new Department("management");
         em.getTransaction().begin();
         em.persist(department);
@@ -45,7 +44,6 @@ public class ExistingSequenceTest {
     @Test
     @Order(2)
     void retrieveTest() {
-        System.out.println("--------test---------");
         em.getTransaction().begin();
         em.createQuery("SELECT d FROM Department d", Department.class)
                 .getSingleResult();

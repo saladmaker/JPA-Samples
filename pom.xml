@@ -5,7 +5,16 @@
     <artifactId>JPA-31-Exampels</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <modules></modules>
+    <modules>
+        <module>access-modes</module>
+        <module>basic-mapping</module>
+        <module>equals-hashcode</module>
+        <module>generation-strategy</module>
+        <module>inheritance</module>
+        <module>multi-value-association</module>
+        <module>single-value-associations</module>
+        <module>table</module>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>19</maven.compiler.release>

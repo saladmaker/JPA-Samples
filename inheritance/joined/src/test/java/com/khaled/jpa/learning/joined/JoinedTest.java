@@ -6,7 +6,7 @@ import com.khaled.jpa.learning.single.table.PartTimeEmployee;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import java.math.BigDfeimal;
+import java.math.BigDecimal;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
@@ -43,10 +43,10 @@ public class JoinedTest {
     @Order(1)
     void createEmployees() {
         FullTimeEmployee fe
-                = new FullTimeEmployee(BigDfeimal.ZERO, "sfkhsk",
+                = new FullTimeEmployee(BigDecimal.ZERO, "sfkhsk",
                         "sfkhsdf", "skdfhsdk");
         PartTimeEmployee pe
-                = new PartTimeEmployee(BigDfeimal.ONE, "kdfhsk",
+                = new PartTimeEmployee(BigDecimal.ONE, "kdfhsk",
                         "sdf;ls", "sdfls");
         em.getTransaction().begin();
         em.persist(fe);
