@@ -1,4 +1,7 @@
 package com.khaled.jpa.learning.access.modes;
+
+
+import static jakarta.persistence.GenerationType.UUID;
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
 import jakarta.persistence.Column;
@@ -6,8 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
-import java.util.Objects;
 
+import java.util.Objects;
+import java.util.UUID;
 /**
  *
  * @author khaled
@@ -15,12 +19,19 @@ import java.util.Objects;
 @Entity
 @Access(AccessType.FIELD)
 public class Supplier {
+
     private static final String LOCAL_AREA = "+213";
+
     private static final String THE_STARTER_ZERO="0";
+
+
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = UUID)
+    private UUID id;
+
     private String name;
+
+
     /*
        this is must be taken care of because we are mxing access 
        in order to instruct the provider that this field is not part of 
@@ -37,12 +48,8 @@ public class Supplier {
         this.name=name;
     }
 
-    public long getId() {
+    public UUID getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -63,10 +70,10 @@ public class Supplier {
     }
     
     /*
-    using the Property Access
-    defining getter and setter for this property
-    using a restiricting access modifier protected or package private
-    add column name and length
+    *   using the Property Access
+    *   defining getter and setter for this property
+    *   using a restiricting access modifier protected or package private
+    *   add column name and length
     */
     @Access(AccessType.PROPERTY)
     @Column(name = "phone_number",length = 13)
@@ -85,16 +92,14 @@ public class Supplier {
     }
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + (int) (this.id ^ (this.id >>> 32));
-        return hash;
+        return Objects.hashCode(id);
     }
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Supplier s) {
-            return Objects.equals(id, s.getId());
-        }
-        return false;
+    public boolean equals(Object o) {
+        if(o == this) return true;
+        return (o instanceof Supplier s)
+            && id != null && id.equals(s.id);
+
     }
     @Override
     public String toString() {

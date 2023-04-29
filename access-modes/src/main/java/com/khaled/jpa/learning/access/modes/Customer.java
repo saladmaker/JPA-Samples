@@ -1,40 +1,41 @@
 package com.khaled.jpa.learning.access.modes;
 
-//import jakarta.persistence.Access;
-//import jakarta.persistence.AccessType;
+import static jakarta.persistence.GenerationType.UUID;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+
 import java.time.LocalDate;
+
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
  * @author khaled
  */
 @Entity
-// this annotation is unicessary because we are not mixin access 
-//@Access(AccessType.FIELD)
+/*
+*   this annotation is unicessary because we are not mixin access
+*   this access type is defaulted to field access because we use @Id
+*       annotation on the field
+*/
 public class Customer {
+
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = UUID)
+    private UUID id;
     
    
-    @Column(
-            name = "first_name",
-            nullable = false,
-            updatable = false,
-            length = 50
-            )
+    @Column(name = "first_name", nullable = false, updatable = false, length = 50)
     private String firstName;
     
-    @Basic(fetch = FetchType.EAGER,
-            optional = false)
+    @Basic(fetch = FetchType.EAGER, optional = false)
     private String lastName;
+
     private LocalDate dateOfBirth;
 
     public Customer() {
@@ -45,18 +46,17 @@ public class Customer {
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
     }
+
     @Override
     public boolean equals(Object other) {
-        if(other instanceof Customer c){
-            return Objects.equals(c.getId(), getId());
-        }
-        return false;
+        if(other == this) return true;
+        return (other instanceof Customer c)
+            && id != null && id.equals(c.id);
     }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 61 * hash + Objects.hashCode(this.id);
-        return hash;
+        return Objects.hashCode(id);
     }
 
     @Override
@@ -64,12 +64,8 @@ public class Customer {
         return "Customer{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + '}';
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {

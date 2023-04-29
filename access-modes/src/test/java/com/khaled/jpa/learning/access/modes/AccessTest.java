@@ -23,7 +23,10 @@ public class AccessTest {
     
     private final static EntityManagerFactory entityManagerFactory =
             Persistence.createEntityManagerFactory("Access-Mode");
+
     private EntityManager entityManager;
+
+
     /**
      * tearing down the database after all test by closing the entityManagerFactory
      */
@@ -31,30 +34,28 @@ public class AccessTest {
     static void tearDown(){
         entityManagerFactory.close();
     }
+
     @BeforeEach
     void createContext() {
-        this.entityManager = entityManagerFactory.createEntityManager();
+        entityManager = entityManagerFactory.createEntityManager();
     }
 
     
     @AfterEach
     void clearContext() {
-        this.entityManager.close();
+        entityManager.close();
         
     }
     
     @Test
     void customerTest() {
-        Customer customer
-                = new Customer("c1",
-                        "c2",
-                        LocalDate.of(2055, 11, 26));
+        Customer customer = new Customer("c1", "c2",  LocalDate.of(2055, 11, 26));
         entityManager.getTransaction().begin();
 
         entityManager.persist(customer);
         entityManager.getTransaction().commit();
 
-        Long actualId = customer.getId();
+        var actualId = customer.getId();
         assertNotNull(customer.getId());
 
         var actualCustomer = entityManager.find(Customer.class, actualId);
@@ -63,6 +64,8 @@ public class AccessTest {
         assertEquals(customer.getLastName(), actualCustomer.getLastName());
         assertEquals(customer.getDateOfBirth(), actualCustomer.getDateOfBirth());
     }
+
+
     @Test
     void empolye() {
         Employe employe = new Employe("mohamed",
@@ -82,6 +85,7 @@ public class AccessTest {
         assertEquals(employe.getLastName(), actualEmploye.getLastName());
         assertEquals(employe.getWage(), actualEmploye.getWage());
     }
+
     @Test
     void supplierTest() {
         final String localPhoneNumber = "0541412546";

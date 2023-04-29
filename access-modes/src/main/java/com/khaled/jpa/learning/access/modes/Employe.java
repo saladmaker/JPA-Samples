@@ -14,8 +14,11 @@ import java.util.UUID;
  * @author khaled
  */
 @Entity
-// this annotation is unicessary because we aren't mixing access
-//@Access(AccessType.PROPERTY) 
+/*
+*    this annotation is unicessary because we aren't mixing access
+*   this access type is defaulted to field access because we use @Id
+*       annotation on the field
+*/
 /*
 CREATE TABLE EMPLOYE (ID VARCHAR NOT NULL, first_name VARCHAR(50) NOT NULL,
 last_name VARCHAR(50) NOT NULL, salary NUMERIC(38), PRIMARY KEY (ID))
@@ -45,13 +48,16 @@ public class Employe {
     public void setId(UUID id) {
         this.id = id;
     }
+
     @Column(name = "first_name", nullable = false, length = 50)
     public String getFirstName() {
         return firstName;
     }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
     @Column(name = "last_name", nullable = false, length = 50)
     public String getLastName() {
         return lastName;
@@ -60,6 +66,7 @@ public class Employe {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     @Column(name = "salary")
     public BigDecimal getWage() {
         return wage;
@@ -71,10 +78,9 @@ public class Employe {
     
     @Override
     public boolean equals(Object other) {
-        if (other instanceof Employe e) {
-            return Objects.equals(getId(), e.getId());
-        }
-       return false;
+        if(other == this) return true;
+        return (other instanceof Employe e)
+            && id != null && id.equals(e.id);
     }
     @Override
     public int hashCode() {
