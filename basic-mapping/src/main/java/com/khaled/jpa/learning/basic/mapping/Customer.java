@@ -34,7 +34,7 @@ public class Customer {
     /* 
     fetch: fetch the correspoding column eagrly or lazily(with a new SELECT sql statement)!
     
-    optional: is disregraded for perimitive types it may have effect on DDL or it may not no guarantee
+    optional: is disregarded for perimitive types it may have effect on DDL or it may not no guarantee
     */
     @Basic(fetch = FetchType.EAGER,
             optional = false)
