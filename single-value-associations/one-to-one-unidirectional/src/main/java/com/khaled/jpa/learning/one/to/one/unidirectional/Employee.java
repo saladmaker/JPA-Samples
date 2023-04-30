@@ -1,4 +1,5 @@
 package com.khaled.jpa.learning.one.to.one.unidirectional;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -6,6 +7,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+
+import java.util.Objects;
+
 /**
  *
  * @author khaled
@@ -13,15 +17,20 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Employee {
     @GeneratedValue
-    @Id private long id;
+    @Id private Long id;
     
     @Column(name = "full_name")
     private String fullName;
     
+
+    /*
+    *   @JoinColumn(nullable=false) nullable is true by default which means (0..1-1) optional relationship 
+    *        set it to false to make the relationship mandatory
+    *
+    *   @JoinColumn(unique = true) unique is false by default you must set it to true to inforce multiplicity <= 1
+    */
+    @JoinColumn(unique = true)
     @OneToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(nullable=false) mandatory 1-1 default is optional 1-0..1
-    //@JoinColumn(unique = false) is mondatory to inforce one-to-one
-    @JoinColumn(unique = true /* nullable=[false|true] mondatory or optional relationship*/)
     private Desk desk;
     public Employee() {
 
@@ -34,12 +43,8 @@ public class Employee {
         this.desk = desk;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getFullName() {
@@ -59,20 +64,21 @@ public class Employee {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + (int) (this.id ^ (this.id >>> 32));
-        return hash;
-    }
-
-    @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Employee e) {
-            return this.id == e.id;
-        }
-        return false;
-    }
 
+        if(obj == this) return true;
+
+        return (obj instanceof Employee e)
+            && null != id
+            && Objects.equals(id, e.id);      
+
+    }
+    
+    
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
     @Override
     public String toString() {
         return "Employee{" + "id=" + id + ", fullName=" + fullName + ", desk=" + desk + '}';

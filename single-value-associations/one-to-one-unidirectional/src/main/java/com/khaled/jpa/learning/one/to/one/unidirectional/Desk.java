@@ -1,15 +1,21 @@
 package com.khaled.jpa.learning.one.to.one.unidirectional;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
+
+import java.util.Objects;
+
 /**
  *
  * @author khaled
  */
 @Entity
 public class Desk {
+
     @GeneratedValue
-    @Id private long id;
+    @Id private Long id;
+
     private String floor;
 
     public Desk(String floor) {
@@ -20,26 +26,23 @@ public class Desk {
     
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Desk d) {
-            return d.id  == this.id;
-        }       
-        return false;
+
+        if(obj == this) return true;
+
+        return (obj instanceof Desk d)
+            && null != id
+            && Objects.equals(id, d.id);      
+
     }
     
     
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
-        return hash;
+        return getClass().hashCode();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getFloor() {
