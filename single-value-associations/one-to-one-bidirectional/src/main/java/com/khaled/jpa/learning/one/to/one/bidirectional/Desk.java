@@ -1,21 +1,29 @@
 package com.khaled.jpa.learning.one.to.one.bidirectional;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.OneToOne;
+
+import java.util.Objects;
+
 /**
  *
  * @author khaled
  */
 @Entity
 public class Desk {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id private long id;
+    @Id private Long id;
+
     private String floor;
+
     @OneToOne(mappedBy = "desk")
     private Employee employee;
+
     public Desk(String floor) {
         this.floor = floor;
     }
@@ -24,26 +32,20 @@ public class Desk {
     
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Desk d) {
-            return d.id  == this.id;
-        }       
-        return false;
+        if(this == obj) return true;
+        return (obj instanceof Desk d)
+            && null != id
+            && Objects.equals(this.id , d.id);
     }
     
     
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
-        return hash;
+        return getClass().hashCode();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getFloor() {
@@ -58,9 +60,8 @@ public class Desk {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
+    void setEmployee(Employee employee) {
         this.employee = employee;
     }
-    
-    
+
 }

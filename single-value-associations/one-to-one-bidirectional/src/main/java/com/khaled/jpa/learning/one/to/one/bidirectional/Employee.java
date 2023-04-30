@@ -1,4 +1,5 @@
 package com.khaled.jpa.learning.one.to.one.bidirectional;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -6,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+
 import java.util.Objects;
 /**
  *
@@ -13,8 +15,9 @@ import java.util.Objects;
  */
 @Entity
 public class Employee {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id private long id;
+    @Id private Long id;
     
     @Column(name = "full_name")
     private String fullName;
@@ -23,6 +26,8 @@ public class Employee {
     //@JoinColumn(nullable=false) mandatory 1-1 default is optional 1-0..1
     @JoinColumn(unique = true)// is mondatory to inforce 0..1 multiplecity
     private Desk desk;
+
+
     public Employee() {
 
     }
@@ -34,12 +39,8 @@ public class Employee {
         this.desk = desk;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getFullName() {
@@ -55,17 +56,30 @@ public class Employee {
     }
 
     public void setDesk(Desk desk) {
+
         this.desk = desk;
+        desk.setEmployee(this);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    void removeDesk(){
+        if(null != desk){
+            desk.setEmployee(null);
+        }
+        this.desk = null;
     }
 
     @Override
     public boolean equals(Object obj) {
-        return (obj instanceof Employee e)&& e.id == this.id;
+        if(this == obj) return true;
+        return (obj instanceof Employee e)
+            && null != id
+            && Objects.equals(this.id , e.id);
+    }
+    
+    
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 
     @Override

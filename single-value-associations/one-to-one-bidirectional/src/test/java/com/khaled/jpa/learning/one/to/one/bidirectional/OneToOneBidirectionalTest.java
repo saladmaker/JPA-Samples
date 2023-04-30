@@ -98,6 +98,7 @@ public class OneToOneBidirectionalTest {
     @Test()
     @Order(5)
     void hackTheDeskTest() {
+
         Employee ourEmployee = entityManager
                 .createQuery("SELECT e FROM Employee e WHERE e.fullName=:name",
                         Employee.class)
@@ -113,5 +114,31 @@ public class OneToOneBidirectionalTest {
             entityManager.getTransaction().commit();
         });
     }
+    @Test()
+    @Order(6)
+    void changeEmployeeTest() {
+        entityManager.getTransaction().begin();
 
+        Employee firstEmployee = entityManager
+                .createQuery("SELECT e FROM Employee e WHERE e.fullName=:name",
+                        Employee.class)
+                .setParameter("name", "khaled")
+                .getSingleResult();
+
+        firstEmployee.removeDesk();
+
+        Employee ourEmployee = entityManager
+                .createQuery("SELECT e FROM Employee e WHERE e.fullName=:name",
+                        Employee.class)
+                .setParameter("name", "kada")
+                .getResultList().get(0);
+        Desk ourDesk = entityManager
+                .createQuery("SELECT d FROM Desk d",
+                        Desk.class)
+                .getSingleResult();
+        
+        ourEmployee.setDesk(ourDesk);
+        entityManager.getTransaction().commit();        
+
+    }
 }
