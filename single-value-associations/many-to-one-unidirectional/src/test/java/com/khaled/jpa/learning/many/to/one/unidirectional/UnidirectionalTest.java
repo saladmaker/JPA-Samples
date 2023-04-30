@@ -3,12 +3,12 @@ package com.khaled.jpa.learning.many.to.one.unidirectional;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
+
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -25,21 +25,13 @@ public class UnidirectionalTest {
     private static EntityManager entityManager;
 
     @BeforeAll
-    static void generate() {
-        entityManagerFactory
-                = Persistence.createEntityManagerFactory("setupUOneToMany");
+    static void setup() {
+        entityManagerFactory = Persistence.createEntityManagerFactory("setupUOneToMany");
         entityManager = entityManagerFactory.createEntityManager();
     }
 
-    @BeforeEach
-    void createContext() {
-        entityManagerFactory
-                = Persistence.createEntityManagerFactory("readyUOneToMany");
-        entityManager = entityManagerFactory.createEntityManager();
-    }
-
-    @AfterEach
-    void clearContext() {
+    @AfterAll
+    static void tearDown() {
         entityManager.close();
         entityManagerFactory.close();
     }
@@ -53,29 +45,21 @@ public class UnidirectionalTest {
         entityManager.getTransaction().commit();
     }
 
-    @Test
-    @Order(2)
-    void persistEmployeeTest() {
-        Employee employee
-                = new Employee("mohamed", "ali", null);
-        entityManager.getTransaction().begin();
-        entityManager.persist(employee);
-        entityManager.getTransaction().commit();
-    }
 
     @Test
-    @Order(3)
+    @Order(2)
     void unidirectionalMappingTest() {
-        var ourEmployee = entityManager
-                .createQuery("SELECT e FROM Employee e",
-                        Employee.class)
-                .getSingleResult();
+        entityManager.getTransaction().begin();
+        
+        Employee employee = new Employee("mohamed", "ali", null);
         var ourDepartment = entityManager
                 .createQuery("SELECT d FROM Department d",
                         Department.class)
                 .getSingleResult();
-        entityManager.getTransaction().begin();
-        ourEmployee.setDepartment(ourDepartment);
+        
+        employee.setDepartment(ourDepartment);
+        entityManager.persist(employee);
+
         entityManager.getTransaction().commit();
     }
 }

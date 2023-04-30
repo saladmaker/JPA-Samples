@@ -14,15 +14,5 @@
         <property name="eclipselink.logging.parameters" value="true"/>
         <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
     </persistence-unit>
-    <persistence-unit name="readyUOneToMany" transaction-type="RESOURCE_LOCAL">
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <!--it better to list your entities than to use this element!-->
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
-        <class>com.khaled.jpa.learning.many.to.one.unidirectional.Department</class>
-        <class>com.khaled.jpa.learning.many.to.one.unidirectional.Employee</class>
-        <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
-        <property name="eclipselink.logging.level.sql" value="FINEST"/>
-        <property name="eclipselink.logging.parameters" value="true"/>
-        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
-    </persistence-unit>
+
 </persistence>

@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
 import java.util.Objects;
 
 /**
@@ -14,21 +15,23 @@ import java.util.Objects;
  * @author khaled
  */
 @Entity
-@Table(name = "EMP")
 public class Employee {
 
-    @Column(name = "EMP_id")
     @GeneratedValue
     @Id
-    private long id;
+    private Long id;
 
-    @Column(name = "first_name")
     private String firstName;
-    @Column(name = "last_name")
+
     private String lastName;
 
-    @ManyToOne()
-    @JoinColumn(name = "DEP_id")
+    /*
+    *   @JoinColumn(nullable = false) to inforce that the relationship
+    *       is mondatory from the perspective of the owner entity
+    *   every row of Employee must associated with an existing row of Department
+    */
+    @JoinColumn(name = "DEP_ID", nullable = false)
+    @ManyToOne
     Department department;
 
     public Employee() {
@@ -40,13 +43,10 @@ public class Employee {
         this.department = department;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -73,16 +73,16 @@ public class Employee {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Employee e) {
-            return this.id == e.getId();
-        }
-        return false;
+    public boolean equals(Object other) {
+        if(other == this) return true;
+        return (other instanceof Employee e)
+            && null != id
+            && Objects.equals(id, e.id);
     }
 
     @Override
     public int hashCode() {
-        return Employee.class.hashCode();
+        return getClass().hashCode();
     }
 
     @Override
