@@ -7,7 +7,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
 import java.time.LocalDate;
+
 import java.util.Objects;
 
 /**
@@ -15,25 +17,30 @@ import java.util.Objects;
  * @author khaled
  */
 /*
-schema = PED
-table = STD
-firstName = first_name VARCHAR(50) NOT NULL
-lastName = last_name VARCHAR(50) NOT NULL
-*/
+ * schema = PED
+ * table = STD
+ * firstName = first_name VARCHAR(50) NOT NULL
+ * lastName = last_name VARCHAR(50) NOT NULL
+ */
 @Entity
 @Table(name = "STD", schema = "PED")
 public class Student {
+    
+    @Column(name = "ST_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "first_name")
     private String firstName;
+
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "DOF", unique = true )
+
+    @Column(name = "DOF")
     private LocalDate dateOfBirth;
 
-    public Student (String firstName, String lastName, LocalDate dateOfBirth) {
+    public Student(String firstName, String lastName, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -44,9 +51,6 @@ public class Student {
 
     public Long getId() {
         return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -72,20 +76,19 @@ public class Student {
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 19 * hash + Objects.hashCode(this.id);
-        return hash;
+        return getClass().hashCode();
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof Student pf) {
-            return Objects.equals(pf.getId(), id);
-        }
-        return false;
+        if (other == this)
+            return true;
+        return (other instanceof Student s)
+                && null != id
+                && Objects.equals(id, s.id);
     }
 
     @Override
@@ -94,5 +97,5 @@ public class Student {
                 ", lastName=" + lastName + ", socialSecurityNumber=" +
                 dateOfBirth + '}';
     }
-      
+
 }

@@ -9,20 +9,17 @@
         <class>com.khaled.jpa.learning.table.Professor</class>
         <class>com.khaled.jpa.learning.table.Student</class>
         
-        <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="hibernate.show_sql" value="true"/>
-        <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/"/>
-        <property name="jakarta.persistence.jdbc.user" value="khaled"/>
-        <property name="jakarta.persistence.jdbc.password" value="1994"/>
-<!--        <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
-        <property name="eclipselink.create-ddl-jdbc-file-name" value="META-INF/sql/create.sql"/>
-        <property name="eclipselink.drop-ddl-jdbc-file-name" value="META-INF/sql/drop.sql"/>-->
+        <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+        <property name="eclipselink.target-database" value="DB2"/>
+        <property name="eclipselink.logging.level.sql" value="FINEST"/>
+        <property name="eclipselink.logging.parameters" value="true"/>
+
+        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
         <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
         <property name="jakarta.persistence.schema-generation.scripts-action" value="drop-and-create"/>
         <property name="jakarta.persistence.schema-generation.create-source" value="script"/>
         <property name="jakarta.persistence.schema-generation.create-script-source" 
                   value="META-INF/sql/create.sql"/>
-        
         <property name="jakarta.persistence.sql-load-script-source" value="META-INF/sql/load.sql"/>
         <property name="jakarta.persistence.schema-generation.drop-script-source" 
                   value="META-INF/sql/drop.sql"/>
