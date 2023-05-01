@@ -16,24 +16,26 @@ import java.util.Objects;
  */
 @Entity
 class PostDetail {
+
     @Basic(fetch = FetchType.LAZY)
-    @Lob()
+    @Lob
     private char[] content;
+
     @Id
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     private Post post;
+
     public PostDetail(char[] content) {
         this.content = content;
+        this.post = post;
     }
-    public PostDetail(){}
+    protected PostDetail(){}
+
     @Override
     public boolean equals(Object obj) {
-        return (obj instanceof PostDetail p)&&
-                Objects.equals(getId(), p.getId());
-    }
-
-    public Long getId() {
-        return getPost().getId();
+        if(obj == this) return true;
+        return (obj instanceof PostDetail pd)
+            && Objects.equals(post, pd.post);
     }
 
     public char[] getContent() {
@@ -47,18 +49,17 @@ class PostDetail {
     public Post getPost() {
         return post;
     }
-
-    public void setPost(Post post) {
+    void setPost(Post post){
         this.post = post;
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(getPost().getId());
+        return Objects.hash(post);
     }
 
     @Override
     public String toString() {
-        return "PostDetails{" + "id=" + getPost().getId() + ", content=" + Arrays.toString(content) + '}';
+        return "PostDetails{"  + "content=" + Arrays.toString(content) + '}';
     }    
 }
