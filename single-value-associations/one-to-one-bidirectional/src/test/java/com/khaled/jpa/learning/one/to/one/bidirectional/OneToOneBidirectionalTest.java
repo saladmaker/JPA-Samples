@@ -5,10 +5,11 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceException;
 import org.junit.jupiter.api.AfterEach;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -23,27 +24,21 @@ public class OneToOneBidirectionalTest {
     private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("setupBOneToOne");;
     private static EntityManager entityManager;
     
+    /**
+     * tearing down the database after all test by closing the
+     * entityManagerFactory
+     */
     @BeforeAll
     static void generatingDatabase(){
         entityManagerFactory
                 = Persistence.createEntityManagerFactory("setupBOneToOne");
         entityManager = entityManagerFactory.createEntityManager();
     }
-    /**
-     * tearing down the database after all test by closing the
-     * entityManagerFactory
-     */
-    @BeforeEach
-    void createContext() {
-        entityManagerFactory
-                = Persistence.createEntityManagerFactory("readyBOneToOne");
-        this.entityManager = entityManagerFactory.createEntityManager();
-    }
 
-    @AfterEach
-    void clearContext() {
-        this.entityManager.close();
-        this.entityManagerFactory.close();
+    @AfterAll
+    static void clearContext() {
+        entityManager.close();
+        entityManagerFactory.close();
     }
 
     @Test
