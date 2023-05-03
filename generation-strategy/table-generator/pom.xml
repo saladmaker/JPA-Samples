@@ -6,6 +6,6 @@
         <artifactId>generation-strategy</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>using-existing-table-generator</artifactId>
+    <artifactId>table-generator</artifactId>
     <packaging>jar</packaging>
 </project>

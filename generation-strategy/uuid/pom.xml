@@ -8,12 +8,4 @@
     </parent>
     <artifactId>uuid</artifactId>
     <packaging>jar</packaging>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.khaled.plugins.weaving</groupId>
-                <artifactId>eclipselink-weaving</artifactId>              
-            </plugin>
-        </plugins>
-    </build>
 </project>

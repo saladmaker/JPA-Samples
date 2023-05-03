@@ -13,8 +13,9 @@
         <module>identity</module>
         <module>sequence</module>
         <module>uuid</module>
-        <module>table</module>
+        <module>table-generator</module>
         <module>using-existing-table-generator</module>
         <module>using-existing-sequence</module>
+        <module>hibernate-sequence-pooled</module>
     </modules>
 </project>
