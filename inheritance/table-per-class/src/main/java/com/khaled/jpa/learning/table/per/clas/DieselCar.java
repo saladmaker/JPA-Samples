@@ -7,9 +7,12 @@ import jakarta.persistence.Entity;
  *
  * @author khaled
  */
+
 @Entity
 public class DieselCar extends Vehicle{
+
     private int maxSpeed;
+    
     private int numberOfCylinder;
 
     public DieselCar(int maxSpeed, int numberOfCylinder, String vun, String brand, String model, int power) {
@@ -36,6 +39,7 @@ public class DieselCar extends Vehicle{
     public void setNumberOfCylinder(int numberOfCylinder) {
         this.numberOfCylinder = numberOfCylinder;
     }
+
     @Override
     public boolean equals(Object obj){
         return (obj instanceof DieselCar d)

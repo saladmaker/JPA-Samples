@@ -10,11 +10,14 @@ import jakarta.persistence.Version;
  *
  * @author khaled
  */
+
 @MappedSuperclass
 public abstract class BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Version
     private int version;
 
@@ -25,9 +28,6 @@ public abstract class BaseEntity {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public int hashCode() {
@@ -39,14 +39,8 @@ public abstract class BaseEntity {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if(getClass() != obj.getClass()){
-            return false;
-        }
         return (obj instanceof BaseEntity b)
-                && (b.id != null && this.id != null)
-                && b.id.equals(this.id);
+                && b.id != null
+                && id.equals(b.id);
     }  
 }

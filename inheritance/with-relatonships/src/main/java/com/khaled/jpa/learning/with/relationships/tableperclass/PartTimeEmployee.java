@@ -25,4 +25,7 @@ public class PartTimeEmployee extends Employee {
         return (obj instanceof PartTimeEmployee p)
                 && super.equals(p);
     }
+    public BigDecimal getHourlyRate(){
+        return hourlyRate;
+    }
 }

@@ -1,12 +1,14 @@
-package com.khaled.jpa.learning.single.table;
+package com.khaled.jpa.learning.joined;
 
 import jakarta.persistence.Entity;
+
 import java.math.BigDecimal;
 
 /**
  *
  * @author khaled
  */
+
 @Entity
 public class PartTimeEmployee extends Employee{
     private BigDecimal rate;

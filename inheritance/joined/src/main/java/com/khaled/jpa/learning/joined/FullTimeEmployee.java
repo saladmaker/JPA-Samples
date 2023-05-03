@@ -1,6 +1,7 @@
-package com.khaled.jpa.learning.single.table;
+package com.khaled.jpa.learning.joined;
 
 import jakarta.persistence.Entity;
+
 import java.math.BigDecimal;
 
 /**
@@ -28,6 +29,7 @@ public class FullTimeEmployee extends Employee {
     public void setSalary(BigDecimal salary) {
         this.salary = salary;
     }
+
     @Override
     public boolean equals(final Object obj){
         return (obj instanceof FullTimeEmployee f)

@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
  *
  * @author khaled
  */
+
 @Entity
 public class ElectricCar extends Vehicle {
 

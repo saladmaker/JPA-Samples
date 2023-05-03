@@ -3,8 +3,11 @@ package com.khaled.jpa.learning.table.per.clas;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.notNullValue;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
@@ -38,11 +41,8 @@ public class TablPerClassTest {
     @Test
     @Order(1)
     void createCars() {
-        ElectricCar ec
-                = new ElectricCar(200, 9,
-                        "3123jl231l23", "tesla", "420", 100);
-        DieselCar dc = new DieselCar(300, 8,
-                "dslfjl34l", "porch", "911", 300);
+        ElectricCar ec = new ElectricCar(200, 9, "3123jl231l23", "tesla", "420", 100);
+        DieselCar dc = new DieselCar(300, 8, "dslfjl34l", "porch", "911", 300);
         em.getTransaction().begin();
         em.persist(ec);
         em.persist(dc);
@@ -53,24 +53,17 @@ public class TablPerClassTest {
     @Test
     @Order(2)
     void createCarsTest() {
-        var ec = em.createQuery(
-                "SELECT e FROM ElectricCar e",
-                ElectricCar.class
-        ).getSingleResult();
-        assertThat(ec, notNullValue());
+        var ec = em.createQuery("SELECT e FROM ElectricCar e", ElectricCar.class)
+                .getSingleResult();
         assertThat(ec.getId(), notNullValue());
-        var dc = em.createQuery(
-                "SELECT d FROM DieselCar d",
-                DieselCar.class
-        ).getSingleResult();
-        assertThat(dc, notNullValue());
+
+        var dc = em.createQuery("SELECT d FROM DieselCar d", DieselCar.class)
+                .getSingleResult();
         assertThat(dc.getId(), notNullValue());
-        var cs = em.createQuery(
-                "SELECT v FROM Vehicle v",
-                Vehicle.class
-        ).getResultList();
-        assertThat(cs, hasSize(2));
-        cs.forEach(System.out::println);
+
+        var ac = em.createQuery("SELECT v FROM Vehicle v", Vehicle.class)
+                .getResultList();
+        assertThat(ac, hasSize(2));
     }
 
 }

@@ -1,14 +1,18 @@
 package com.khaled.jpa.learning.single.table;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+
 import java.math.BigDecimal;
 
 /**
  *
  * @author khaled
  */
+@DiscriminatorValue(value = "PE")
 @Entity
 public class PartTimeEmployee extends Employee{
+
     private BigDecimal rate;
 
     

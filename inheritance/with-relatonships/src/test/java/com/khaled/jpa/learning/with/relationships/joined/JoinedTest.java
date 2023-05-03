@@ -1,18 +1,24 @@
 package com.khaled.jpa.learning.with.relationships.joined;
 
+import com.khaled.jpa.learning.with.relationships.Department;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+
 import java.math.BigDecimal;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 import org.hamcrest.core.IsInstanceOf;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+
 /**
  *
  * @author khaled
@@ -24,7 +30,7 @@ public class JoinedTest {
     private static EntityManager em;
 
     @BeforeAll
-    static void createPersistenceContext() {//                       
+    static void createPersistenceContext() {//
         emf = Persistence.createEntityManagerFactory("Joined");
         em = emf.createEntityManager();
     }
@@ -37,10 +43,9 @@ public class JoinedTest {
 
     @Test
     @Order(1)
-    void creation() {
+    void persist() {
         Department department = new Department("IT");
-        PartTimeEmployee pe = new PartTimeEmployee(BigDecimal.ONE,
-                "ksdlfs", "ksdlf", "sdfljsdf");
+        PartTimeEmployee pe = new PartTimeEmployee(BigDecimal.ONE, "ksdlfs", "ksdlf", "sdfljsdf");
         em.getTransaction().begin();
         em.persist(department);
         pe.setDepartment(department);
@@ -51,21 +56,20 @@ public class JoinedTest {
     @Test
     @Order(2)
     void polymorphicQuery() {
-        var employee = em.createQuery(
-                "SELECT e FROM Employee e",
-                Employee.class
-        ).getSingleResult();
+        var employee = em.createQuery("SELECT e FROM Employee e", Employee.class)
+                .getSingleResult();
+
         assertThat(employee.getId(), notNullValue());
         assertThat(employee.getDepartment(), notNullValue());
         assertThat(employee.getDepartment(), new IsInstanceOf(Department.class));
     }
+
     @Test
     @Order(3)
     void specializedQuery() {
-        var employee = em.createQuery(
-                "SELECT pe FROM PartTimeEmployee pe",
-                PartTimeEmployee.class
-        ).getSingleResult();
+        var employee = em.createQuery("SELECT pe FROM PartTimeEmployee pe", PartTimeEmployee.class)
+                .getSingleResult();
+
         assertThat(employee.getId(), notNullValue());
         assertThat(employee.getDepartment(), notNullValue());
         assertThat(employee.getDepartment(), new IsInstanceOf(Department.class));

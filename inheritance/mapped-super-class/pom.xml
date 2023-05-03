@@ -8,7 +8,4 @@
     </parent>
     <artifactId>mapped-super-class</artifactId>
     <packaging>jar</packaging>
-    <properties>
-        <maven.compiler.release>19</maven.compiler.release>
-    </properties>
 </project>

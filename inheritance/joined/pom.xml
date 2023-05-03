@@ -8,7 +8,4 @@
     </parent>
     <artifactId>joined</artifactId>
     <packaging>jar</packaging>
-    <properties>
-        <maven.compiler.release>19</maven.compiler.release>
-    </properties>
 </project>

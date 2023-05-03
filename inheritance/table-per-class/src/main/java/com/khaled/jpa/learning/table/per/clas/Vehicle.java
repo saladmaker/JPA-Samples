@@ -7,35 +7,40 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+
 import java.util.Objects;
 
 /**
  *
  * @author khaled
  */
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
 // use abstract if you don't want vehicle to be mapped to its own class.
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Entity
 public abstract class Vehicle {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
+
     @Column(unique = true, nullable = false)
     private String vehicleUniqueNumber;
-    
-    
+
     @Column(nullable = false)
     private String brand;
+
     @Column(nullable = false)
     private String model;
+
     @Column(nullable = false)
     private int power;
 
-    public Vehicle() {
+    protected Vehicle() {
     }
-    
-    public Vehicle(String vun,String brand, String model, int power) {
+
+    public Vehicle(String vun, String brand, String model, int power) {
+        Objects.requireNonNull(vun);
         this.vehicleUniqueNumber = vun;
         this.brand = brand;
         this.model = model;
@@ -70,29 +75,19 @@ public abstract class Vehicle {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getVehicleUniqueNumber() {
         return vehicleUniqueNumber;
     }
 
-    public void setVehicleUniqueNumber(String vehicleUniqueNumber) {
-        this.vehicleUniqueNumber = vehicleUniqueNumber;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 19 * hash + Objects.hashCode(this.vehicleUniqueNumber);
-        return hash;
+        return Objects.hashCode(vehicleUniqueNumber);
     }
 
     @Override
     public boolean equals(Object obj) {
         return (obj instanceof Vehicle v)
-                && Objects.equals(v.vehicleUniqueNumber, this.vehicleUniqueNumber);
+                && vehicleUniqueNumber.equals(v.vehicleUniqueNumber);
     }
 
     @Override

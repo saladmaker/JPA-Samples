@@ -1,12 +1,14 @@
 package com.khaled.jpa.learning.with.relationships.joined;
 
 import jakarta.persistence.Entity;
+
 import java.math.BigDecimal;
 
 /**
  *
  * @author khaled
  */
+
 @Entity
 public class FullTimeEmployee extends Employee {
 
@@ -17,7 +19,7 @@ public class FullTimeEmployee extends Employee {
         this.annualWage = annualWage;
     }
 
-    public FullTimeEmployee() {
+    FullTimeEmployee() {
     }
 
     public BigDecimal getAnnualWage() {

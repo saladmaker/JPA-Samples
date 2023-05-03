@@ -8,4 +8,12 @@
     </parent>
     <artifactId>inheritance</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>inheriting-non-entity-classes</module>
+        <module>joined</module>
+        <module>mapped-super-class</module>
+        <module>single-table</module>
+        <module>table-per-class</module>
+        <module>with-relatonships</module>
+    </modules>
 </project>

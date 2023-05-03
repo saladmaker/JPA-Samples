@@ -1,4 +1,4 @@
-package com.khaled.jpa.learning.single.table;
+package com.khaled.jpa.learning.joined;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +13,7 @@ import java.util.Objects;
  *
  * @author khaled
  */
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Employee {
@@ -20,14 +21,18 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
+
     @Column(nullable = false, unique = true)
     private String SSN;
+
     @Column(nullable = false, unique = true)
     private String firstName;
+
     @Column(nullable = false, unique = true)
     private String lastName;
 
     public Employee(String SSN, String firstName, String lastName) {
+        Objects.requireNonNull(SSN, "SSN must not be null");
         this.SSN = SSN;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,16 +45,8 @@ public class Employee {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getSSN() {
         return SSN;
-    }
-
-    public void setSSN(String SSN) {
-        this.SSN = SSN;
     }
 
     public String getFirstName() {
@@ -70,15 +67,13 @@ public class Employee {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.SSN);
-        return hash;
+        return Objects.hashCode(SSN);
     }
 
     @Override
     public boolean equals(final Object obj) {
         return (obj instanceof Employee e)
-                && Objects.equals(this.SSN, e.SSN);
+                && Objects.equals(SSN, e.SSN);
     }
 
 }

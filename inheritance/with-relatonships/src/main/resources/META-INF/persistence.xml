@@ -5,58 +5,75 @@
              version="3.1">
        
     <persistence-unit name="MappedSuperClass" transaction-type="RESOURCE_LOCAL">
+        
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <class>com.khaled.jpa.learning.with.relationships.mappedsuperclass.Employee</class>
         <class>com.khaled.jpa.learning.with.relationships.mappedsuperclass.FullTimeEmployee</class>
         <class>com.khaled.jpa.learning.with.relationships.mappedsuperclass.PartTimeEmployee</class> 
-        <class>com.khaled.jpa.learning.with.relationships.mappedsuperclass.Department</class>  
+        <class>com.khaled.jpa.learning.with.relationships.Department</class>  
+        
         <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
         <property name="eclipselink.logging.level.sql" value="FINEST"/>
         <property name="eclipselink.logging.parameters" value="true"/>
-        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
+        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:mapped;DB_CLOSE_DELAY=-1"/>
         <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
         <property name="eclipselink.target-database" value="DB2"/>
     </persistence-unit>
+
+
     <persistence-unit name="TablePerClass" transaction-type="RESOURCE_LOCAL">
+        
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <class>com.khaled.jpa.learning.with.relationships.tableperclass.Employee</class>
         <class>com.khaled.jpa.learning.with.relationships.tableperclass.FullTimeEmployee</class>
         <class>com.khaled.jpa.learning.with.relationships.tableperclass.PartTimeEmployee</class> 
-        <class>com.khaled.jpa.learning.with.relationships.tableperclass.Department</class>  
+        <class>com.khaled.jpa.learning.with.relationships.Department</class>  
+        
         <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
         <property name="eclipselink.logging.level.sql" value="FINEST"/>
         <property name="eclipselink.logging.parameters" value="true"/>
-        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
+        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:table;DB_CLOSE_DELAY=-1"/>
         <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
         <property name="eclipselink.target-database" value="DB2"/>
     </persistence-unit>
+    
+
     <persistence-unit name="SingleTable" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <class>com.khaled.jpa.learning.with.relationships.singletable.Employee</class>
         <class>com.khaled.jpa.learning.with.relationships.singletable.FullTimeEmployee</class>
         <class>com.khaled.jpa.learning.with.relationships.singletable.PartTimeEmployee</class> 
-        <class>com.khaled.jpa.learning.with.relationships.singletable.Department</class>  
+        <class>com.khaled.jpa.learning.with.relationships.Department</class>  
+    
         <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
         <property name="eclipselink.logging.level.sql" value="FINEST"/>
         <property name="eclipselink.logging.parameters" value="true"/>
-        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
+        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:single;DB_CLOSE_DELAY=-1"/>
         <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
         <property name="eclipselink.target-database" value="DB2"/>
     </persistence-unit>
+    
+
     <persistence-unit name="Joined" transaction-type="RESOURCE_LOCAL">
+        
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <class>com.khaled.jpa.learning.with.relationships.joined.Employee</class>
         <class>com.khaled.jpa.learning.with.relationships.joined.FullTimeEmployee</class>
         <class>com.khaled.jpa.learning.with.relationships.joined.PartTimeEmployee</class> 
-        <class>com.khaled.jpa.learning.with.relationships.joined.Department</class>  
+        <class>com.khaled.jpa.learning.with.relationships.Department</class>  
+        
         <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
         <property name="eclipselink.logging.level.sql" value="FINEST"/>
         <property name="eclipselink.logging.parameters" value="true"/>
-        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
+        <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:joined;DB_CLOSE_DELAY=-1"/>
         <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
         <property name="eclipselink.target-database" value="DB2"/>
     </persistence-unit>
