@@ -22,7 +22,7 @@
         <jpa.eclispelinkprovider.version>4.0.0</jpa.eclispelinkprovider.version>
         <junite.version>5.9.1</junite.version>
         <h2.version>2.1.214</h2.version>
-        <hibernate.version>6.1.6.Final</hibernate.version>
+        <hibernate.version>6.2.1.Final</hibernate.version>
         <mysql.version>8.0.31</mysql.version>
         <hamcrest.version>2.2</hamcrest.version>
     </properties>

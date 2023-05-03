@@ -7,17 +7,5 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>access-modes</artifactId>
-    <packaging>jar</packaging>
-    <dependencies>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>org.eclipse.persistence.jpa</artifactId>
-            <version>${jpa.eclispelinkprovider.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
-        </dependency>
-    </dependencies>   
+    <packaging>jar</packaging>  
 </project>

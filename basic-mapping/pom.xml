@@ -8,6 +8,4 @@
     </parent>
     <artifactId>basic-mapping</artifactId>
     <packaging>jar</packaging>
-    <properties>
-    </properties>
 </project>
