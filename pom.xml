@@ -95,20 +95,33 @@
                     <version>3.0.0</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.khaled.plugins.weaving</groupId>
-                    <artifactId>eclipselink-weaving</artifactId>
-                    <version>1.0.0</version>        
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>3.1.0</version> 
                     <executions>
                         <execution>
+                            <id>weave</id>
                             <phase>process-classes</phase>
                             <goals>
-                                <goal>weave</goal>                          
+                                <goal>java</goal>
                             </goals>
+                            <configuration combine.self="override">
+                                <classpathScope>compile</classpathScope>
+                                <mainClass>org.eclipse.persistence.tools.weaving.jpa.StaticWeave</mainClass>
+                                    <arguments>
+                                        <argument>-loglevel</argument>
+                                        <argument>INFO</argument>
+                                        <argument>-persistenceinfo</argument>
+                                        <argument>${project.build.outputDirectory}</argument>
+                                        <argument>${project.build.outputDirectory}</argument>
+                                        <argument>${project.build.outputDirectory}</argument>
+                                    </arguments>
+                            </configuration>
                         </execution>
-                    </executions>
+                     </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
     </build>
-    
+
 </project>
