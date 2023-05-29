@@ -1,6 +1,5 @@
 package com.khaled.jpa.learning.converter;
 
-import static jakarta.persistence.GenerationType.AUTO;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

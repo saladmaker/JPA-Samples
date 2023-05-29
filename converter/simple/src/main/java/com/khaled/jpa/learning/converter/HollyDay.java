@@ -7,8 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-import java.util.Objects;
-
 import java.time.MonthDay;
 
 /**
@@ -21,16 +19,17 @@ public class HollyDay {
     @GeneratedValue(strategy = AUTO)
     @Id
     private Long id;
-    
+
     @Convert(converter = MonthDayConverter.class)
     private MonthDay hollyDay;
 
-    @Column(unique = true, updatable= false, nullable =false)
+    @Column(unique = true, updatable = false, nullable = false)
     private String name;
 
     public HollyDay() {
     }
-    public HollyDay(String name, MonthDay hollyDay){
+
+    public HollyDay(String name, MonthDay hollyDay) {
         this.name = name;
         this.hollyDay = hollyDay;
     }
@@ -42,6 +41,7 @@ public class HollyDay {
     public MonthDay getDay() {
         return hollyDay;
     }
+
     public String getName() {
         return name;
     }
@@ -52,7 +52,8 @@ public class HollyDay {
 
     @Override
     public boolean equals(Object other) {
-        if(other == this) return true;
+        if (other == this)
+            return true;
         if (other instanceof HollyDay d) {
             return (null != id) && id.equals(d.id);
         }
